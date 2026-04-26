@@ -20,7 +20,7 @@ async function testOrg() {
 			slug: `test-org-${Math.random().toString(36).substring(7)}`
 		},
 		{
-			fetch: { headers: { cookie: cookies, origin: 'http://localhost' } }
+			fetch: { headers: { cookie: cookies } }
 		}
 	)
 	console.log('Org Res Data:', orgRes.data)
@@ -30,7 +30,7 @@ async function testOrg() {
 		'set-active'
 	].post(
 		{ organizationId: orgRes.data?.id },
-		{ fetch: { headers: { cookie: cookies, origin: 'http://localhost' } } }
+		{ fetch: { headers: { cookie: cookies } } }
 	)
 	console.log(
 		'SetActive Res Headers:',

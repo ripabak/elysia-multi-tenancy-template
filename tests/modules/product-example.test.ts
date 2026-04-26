@@ -22,7 +22,7 @@ async function getAuthCookie() {
 			slug: `test-org-${Math.random().toString(36).substring(7)}`
 		},
 		{
-			fetch: { headers: { cookie, origin: 'http://localhost' } }
+			fetch: { headers: { cookie } }
 		}
 	)
 
@@ -30,7 +30,7 @@ async function getAuthCookie() {
 		'set-active'
 	].post(
 		{ organizationId: orgRes.data?.id },
-		{ fetch: { headers: { cookie, origin: 'http://localhost' } } }
+		{ fetch: { headers: { cookie } } }
 	)
 
 	const finalCookie =
@@ -56,7 +56,7 @@ async function getAdminAuthCookie() {
 			slug: `admin-org-${Math.random().toString(36).substring(7)}`
 		},
 		{
-			fetch: { headers: { cookie, origin: 'http://localhost' } }
+			fetch: { headers: { cookie } }
 		}
 	)
 
@@ -65,7 +65,7 @@ async function getAdminAuthCookie() {
 		'set-active'
 	].post(
 		{ organizationId: orgRes.data?.id },
-		{ fetch: { headers: { cookie, origin: 'http://localhost' } } }
+		{ fetch: { headers: { cookie } } }
 	)
 
 	return setActiveRes.response?.headers.get('set-cookie') || cookie
