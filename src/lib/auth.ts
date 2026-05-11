@@ -6,6 +6,8 @@ import * as schema from '../../drizzle/schemas'
 import { env } from './env'
 import { sendOtpEmail } from './mail'
 
+const isTest = env.NODE_ENV === 'test'
+
 export const auth = betterAuth({
 	basePath: '/api',
 	database: drizzleAdapter(db, {
@@ -15,14 +17,17 @@ export const auth = betterAuth({
 		}
 	}),
 	emailAndPassword: {
-		enabled: true
+		enabled: true,
+		requireEmailVerification: false
 	},
 	plugins: [
 		openAPI(),
 		emailOTP({
 			async sendVerificationOTP({ email, otp, type }) {
+				if (isTest) return
 				await sendOtpEmail({ to: email, otp, purpose: type })
-			}
+			},
+			disableSignUp: false
 		}),
 		organization()
 	],
@@ -33,11 +38,11 @@ export const auth = betterAuth({
 	},
 
 	advanced: {
-		useSecureCookies: true,
+		useSecureCookies: !isTest,
 		defaultCookieAttributes: {
 			httpOnly: true,
-			secure: true,
-			sameSite: 'none'
+			secure: !isTest,
+			sameSite: isTest ? 'lax' : 'none'
 		}
 	}
 
