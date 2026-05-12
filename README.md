@@ -82,6 +82,54 @@ bun run lint:fix
 - **OpenAPI / Swagger UI:** `http://localhost:3000/openapi`
 - **Health Check:** `http://localhost:3000/health-check` to check connections (e.g. database, smtp)
 
+## Type Sharing with Eden (type-share-eden-elysia)
+
+This template includes [`type-share-eden-elysia`](https://www.npmjs.com/package/type-share-eden-elysia), a plugin that exposes the backend's Elysia type definitions via an HTTP endpoint. This allows frontend projects to consume fully type-safe API types without a monorepo setup.
+
+### How It Works
+
+The plugin is already registered in `src/app.ts`. On startup it auto-generates a `.d.ts` declaration file from `src/app.ts` and serves it at:
+
+```
+GET http://localhost:3000/types/app.d.ts
+```
+
+The generated file is placed at `./dist/types/src/app.d.ts` (configured via `tsconfig.declarations.json`).
+
+### Frontend Integration
+
+**Sync types once:**
+```bash
+npx type-share-eden-elysia sync http://localhost:3000/types/app.d.ts
+```
+
+**Watch and auto-sync (recommended during development):**
+```bash
+npx type-share-eden-elysia watch http://localhost:3000/types/app.d.ts
+```
+
+Types are saved to `src/types/app.d.ts` on the frontend. Use them with Eden Treaty:
+
+```typescript
+import type { App } from './types/app'
+import { treaty } from '@elysiajs/eden'
+
+const api = treaty<App>('http://localhost:3000')
+const result = await api.api['product-example'].get()
+```
+
+### Plugin Options
+
+| Option | Default | Description |
+|---|---|---|
+| `route` | `/types/app.d.ts` | HTTP route that serves the declaration file |
+| `path` | `./dist/types/src/app.d.ts` | Path to the generated `.d.ts` file |
+| `autoGenerate` | `true` | Auto-generate types on startup |
+| `tsconfigPath` | `./tsconfig.declarations.json` | tsconfig used for generating declarations |
+| `verbose` | `false` | Show generation output in console |
+
+---
+
 ## Database Migrations (Drizzle ORM)
 
 If you make any changes in a module's `schema.ts`, you need to generate migrations and apply them.

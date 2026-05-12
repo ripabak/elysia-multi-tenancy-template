@@ -29,7 +29,8 @@
     "logixlysia": "^6.2.0",
     "nanoid": "^5.1.6",
     "nodemailer": "^8.0.1",
-    "pg": "^8.19.0"
+    "pg": "^8.19.0",
+    "type-share-eden-elysia": "^0.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

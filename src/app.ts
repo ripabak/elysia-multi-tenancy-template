@@ -9,8 +9,10 @@ import { AppError, CustomError } from './core/error'
 import { productExampleHandler } from './modules/product-example/handler'
 import { rateLimit } from 'elysia-rate-limit'
 import { logixlysia } from 'logixlysia'
+import { typeShareEdenElysia } from 'type-share-eden-elysia'
 
 export const app = new Elysia()
+	.use(typeShareEdenElysia())
 	.use(
 		logixlysia({
 			config: {

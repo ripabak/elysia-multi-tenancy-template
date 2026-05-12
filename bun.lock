@@ -17,6 +17,7 @@
         "nanoid": "^5.1.6",
         "nodemailer": "^8.0.1",
         "pg": "^8.19.0",
+        "type-share-eden-elysia": "^0.1.1",
       },
       "devDependencies": {
         "@eslint/js": "^10.0.1",
@@ -500,6 +501,8 @@
     "tsx": ["tsx@4.21.0", "", { "dependencies": { "esbuild": "~0.27.0", "get-tsconfig": "^4.7.5" }, "optionalDependencies": { "fsevents": "~2.3.3" }, "bin": { "tsx": "dist/cli.mjs" } }, "sha512-5C1sg4USs1lfG0GFb2RLXsdpXqBSEhAaA/0kPL01wxzpMqLILNxIxIOKiILz+cdg/pLnOUxFYOR5yhHU666wbw=="],
 
     "type-check": ["type-check@0.4.0", "", { "dependencies": { "prelude-ls": "^1.2.1" } }, "sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew=="],
+
+    "type-share-eden-elysia": ["type-share-eden-elysia@0.1.1", "", { "peerDependencies": { "elysia": "^1.4.28" }, "bin": { "type-share-eden-elysia": "dist/cli.js" } }, "sha512-nnRCw7Javp27DouQIJMnBB0zwmd36NDTiLTzufUTksOs3NpbyosAEUhiWnPb1XQeTlnvMJ5oJct3fNewCgDK9A=="],
 
     "typescript": ["typescript@6.0.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw=="],
 
