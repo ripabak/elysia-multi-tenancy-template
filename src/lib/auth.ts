@@ -20,6 +20,9 @@ export const auth = betterAuth({
 		enabled: true,
 		requireEmailVerification: false
 	},
+	emailVerification: {
+		autoSignInAfterVerification: true
+	},
 	plugins: [
 		openAPI(),
 		emailOTP({
